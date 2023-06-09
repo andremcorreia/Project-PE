@@ -45,3 +45,39 @@ plot(x, y, col = "red", xlab = "Generated values", ylab = "Quantiles", main = "C
 points(x, z, col = "blue")
 abline(0, 1)
 legend("topleft", legend = c("Cauchy", "Normal"), col = c("red", "blue"), pch = 1)
+
+
+
+#Poeeeeeee
+
+# Instale e carregue o pacote ggplot2
+library(ggplot2)
+
+# Defina a semente
+set.seed(1693)
+
+# Gere a amostra de Cauchy
+n <- 101
+location <- -3.2
+scale <- 2
+sample_cauchy <- rcauchy(n, location, scale)
+
+# Ordene a amostra
+sample_sorted <- sort(sample_cauchy)
+
+# Calcule os quantis de probabilidade
+quantiles <- (1:n) / (n + 1)
+cauchy_quantiles <- qcauchy(quantiles, location, scale)
+normal_quantiles <- qnorm(quantiles, mean = 0.6, sd = sqrt(2.4))
+
+# Crie o gráfico
+df <- data.frame(sample_sorted, cauchy_quantiles, normal_quantiles)
+ggplot(df, aes(x = sample_sorted)) +
+  geom_point(aes(y = cauchy_quantiles), color = "blue", size = 3, shape = 1) +
+  geom_point(aes(y = normal_quantiles), color = "red", size = 3, shape = 1) +
+  geom_abline(intercept = 0, slope = 1, color = "green", linetype = "dashed") +
+  labs(x = "Valores gerados ordenados",
+       y = "Quantis de probabilidade",
+       title = "Comparação entre distribuições Cauchy e Normal") +
+  theme_minimal()
+

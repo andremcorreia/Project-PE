@@ -6,7 +6,7 @@ n <- 19 # tamanho da amostra
 # gerar as amostras e calcular as somas dos quadrados
 ssq <- replicate(m, sum(rnorm(n, mean = 0, sd = 1)^2))
 
-# calcular o quantil de probabilidade 0.39 da amostra das somas dos quadrados
+# calcular o quantil de probabilidade 0.3 da amostra das somas dos quadrados
 q1 <- quantile(ssq, probs = 0.3, type = 2)
 
 # calcular o quantil correspondente à distribuição teórica
