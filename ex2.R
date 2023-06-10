@@ -1,17 +1,17 @@
-# 1. Read the data file in R and remove all records referring to South Africa (incomplete data).
+# Ler a data do ficheiro TIME_USE_24092022.csv e remover os registos referentes a Africa do Sul (dados incompletos)
 data <- read.csv("TIME_USE_24092022.csv", sep = ",")
 data <- subset(data, País != "África do Sul")
 
-# 2. In a single graph, create two boxplots that allow comparing the average daily times recorded for Men in two different occupations: Personal care and Unpaid work.
+# Importar library
 library(ggplot2)
 
-# Filter data for Men and the two occupations
+# Filtrar a data por Homens e pelas ocupacoes Cuidados pessoais e Trabalho nao remunerado
 data_men <- subset(data, Sexo == "Homens" & (Ocupação == "Cuidados pessoais" | Ocupação == "Trabalho não remunerado"))
 
-# Create boxplots
+# Criar dois boxplots que permitam comparar os tempos medios diarios registados para homens nas duas diferentes ocupacoes
 p <- ggplot(data_men, aes(x = Ocupação, y = Tempo)) +
   geom_boxplot() +
-  ggtitle("Comparing average daily times for Men in Personal Care and Unpaid Work")
+  ggtitle("Tempo médio diário para Homens para cada ocupação")
 
 # Display plot
 print(p)
