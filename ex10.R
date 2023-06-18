@@ -1,17 +1,28 @@
-mu0 <- 23.7
-mu1 <- 25.1
-sigma2 <- 4
-sigma <- sqrt(sigma2)
+# Definir parâmetros
+null_value <- 23.7
+mu <- 25.1
+sigma <- sqrt(4)
 n <- 44
 m <- 300
 alpha <- 0.04
-set.seed(443)
-p_values <- numeric(m)
 
+# Definir semente
+set.seed(443)
+
+# Gerar m amostras e realizar o teste de hipóteses para cada amostra
+not_rejected <- 0
 for (i in 1:m) {
-  sample <- rnorm(n, mean = mu1, sd = sigma)
-  t_test <- t.test(sample, alternative = "two.sided", mu = mu0, conf.level = 1 - alpha)
-  p_values[i] <- t_test$p.value
+  sample <- rnorm(n, mean = mu, sd = sigma)
+  x_bar <- mean(sample)
+  z <- (x_bar - null_value) / (sigma / sqrt(n))
+  p_value <- 2 * (1 - pnorm(abs(z)))
+  
+  # Verificar se a hipótese nula não foi rejeitada
+  if (p_value > alpha) {
+    not_rejected <- not_rejected + 1
+  }
 }
-prop_nao_rejeitou_h0 <- sum(p_values > alpha) / m
-cat(sprintf("A probabilidade estimada do teste conduzir à não rejeição de H0 é %.3f.", prop_nao_rejeitou_h0))
+
+# Calcular a proporção de vezes que a hipótese nula não foi rejeitada
+prob_not_rejected <- not_rejected / m
+round(prob_not_rejected, 3)
