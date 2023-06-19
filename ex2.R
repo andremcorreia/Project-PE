@@ -7,5 +7,3 @@ data_men <- subset(data, Sexo == "Homens" & (Ocupação == "Cuidados pessoais" |
 ggplot(data_men, aes(x = Ocupação, y = Tempo)) +
   geom_boxplot() +
   ggtitle("Tempo médio diário em minutos para Homens para cada ocupação")
-
-

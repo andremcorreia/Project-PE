@@ -10,5 +10,3 @@ ggplot(sw_data, aes(x = Age.Group, y = Value, fill = Sex)) +
        x = "Age",
        y = "Unemployment Rate (%)",
        fill = "Sex")
-
-
